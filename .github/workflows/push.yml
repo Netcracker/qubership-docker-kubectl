@@ -62,7 +62,9 @@ jobs:
           registry: ghcr.io
           username: ${GITHUB_ACTOR}
           password: ${{secrets.GITHUB_TOKEN}}
-      - name: Derive major tag (if semver)
+      - name: Prepare Tag
+        run: echo "TAG_NAME=$(echo ${TAG_NAME} | sed 's@refs/tags/@@;s@refs/heads/@@;s@/@_@g')" >> $GITHUB_ENV
+      - name: Derive major tag
         id: semver
         shell: bash
         run: |
@@ -83,8 +85,6 @@ jobs:
             TAGS="${TAGS},${IMAGE}:${MAJOR_TAG}"
           fi
           echo "TAGS=${TAGS}" >> "$GITHUB_ENV"
-      - name: Prepare Tag
-        run: echo "TAG_NAME=$(echo ${TAG_NAME} | sed 's@refs/tags/@@;s@refs/heads/@@;s@/@_@g')" >> $GITHUB_ENV
       - name: Prepare Group
         run: echo "GITHUB_GROUP=${GITHUB_GROUP,,}" >> $GITHUB_ENV
       - name: Get package IDs for delete

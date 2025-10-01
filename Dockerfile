@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 ENV HOME="/"
 
@@ -7,8 +7,7 @@ RUN set -x \
         curl \
         jq \
         bash \
-        wget \
-        apk-tools \
+        sh \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETARCH
@@ -19,7 +18,7 @@ RUN set -x \
         --no-check-certificate \
         -nv \
         -O /usr/bin/kubectl \
-        "https://dl.k8s.io/v1.34.1/bin/darwin/${TARGETARCH}/kubectl" \
+        "https://dl.k8s.io/v1.34.1/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl
 
 # Upgrade all tools to avoid vulnerabilities

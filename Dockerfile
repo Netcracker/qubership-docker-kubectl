@@ -7,7 +7,6 @@ RUN set -x \
         curl \
         jq \
         bash \
-        sh \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETARCH

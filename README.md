@@ -1,20 +1,35 @@
-# qubership-repo-template
+# qubership-docker-kubectl
 
-Click [here](https://github.com/Netcracker/qubership-repo-template/generate) to create your copy of this repository.
+A lightweight Alpine-based Docker image with `kubectl` preinstalled.  
+The image is primarily intended for use in Helm hooks or other automation scenarios where direct access to `kubectl` is required.
 
-## Installation
+## Usage
 
-This section typically describes the process of preparing the project for use, including required dependencies and general setup steps.
+Build the image locally:
 
-## Build
+```bash
+docker build -t qubership-docker-kubectl:latest .
+```
 
-This section outlines the build process, tools used, and general information about preparing project artifacts.
+Use in Helm hook (example):
 
-## Testing
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kubectl-job
+  annotations:
+    "helm.sh/hook": pre-install
+spec:
+  template:
+    spec:
+      containers:
+        - name: kubectl
+          image: ghcr.io/netcracker/qubership-docker-kubectl:latest
+          command: ["kubectl", "get", "pods", "-A"]
+      restartPolicy: Never
+```
 
-This section provides a general description of testing strategies, tools, and approaches relevant to the project.
+## License
 
-## Debug
-
-This section provides an overview of debugging approaches and tools relevant to the project.
-
+This project is licensed under the Apache-2.0 License.

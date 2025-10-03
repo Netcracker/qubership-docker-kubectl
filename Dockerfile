@@ -7,6 +7,7 @@ RUN set -x \
         curl \
         jq \
         bash \
+        busybox-static \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETARCH
@@ -23,9 +24,7 @@ RUN set -x \
 # Use the static busybox as /bin/sh and provide `which`
 # busybox-static usually installs /bin/busybox (static) on Alpine
 RUN set -eux \
-  && BB="$(command -v busybox || true)" \
-  && [ -n "$BB" ] \
-  && cp "$BB" /bin/busybox \
+  && cp /bin/busybox.static /bin/busybox \
   && chmod 0755 /bin/busybox \
   && ln -sf /bin/busybox /bin/sh \
   && ln -sf /bin/busybox /bin/which

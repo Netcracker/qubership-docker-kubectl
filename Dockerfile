@@ -25,10 +25,7 @@ RUN set -x \
 # busybox-static usually installs /bin/busybox (static) on Alpine
 RUN set -eux \
   && cp /bin/busybox.static /bin/busybox \
-  && chmod 0755 /bin/busybox \
-  && rm -f /bin/sh \
-  && cp /bin/busybox /bin/sh \
-  && ln -sf /bin/busybox /bin/which
+  && chmod 0755 /bin/busybox
 
 # Upgrade all tools to avoid vulnerabilities
 RUN set -x && apk upgrade --no-cache --available

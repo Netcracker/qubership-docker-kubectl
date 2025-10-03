@@ -7,6 +7,7 @@ RUN set -x \
         curl \
         jq \
         bash \
+        busybox-static \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETARCH
@@ -19,6 +20,10 @@ RUN set -x \
         -O /usr/bin/kubectl \
         "https://dl.k8s.io/v1.34.1/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl
+
+RUN set -eux \
+  && cp /bin/busybox.static /bin/busybox \
+  && chmod 0755 /bin/busybox
 
 # Upgrade all tools to avoid vulnerabilities
 RUN set -x && apk upgrade --no-cache --available

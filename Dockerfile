@@ -26,7 +26,8 @@ RUN set -x \
 RUN set -eux \
   && cp /bin/busybox.static /bin/busybox \
   && chmod 0755 /bin/busybox \
-  && ln -sf /bin/busybox /bin/sh \
+  && rm -f /bin/sh \
+  && cp /bin/busybox /bin/sh \
   && ln -sf /bin/busybox /bin/which
 
 # Upgrade all tools to avoid vulnerabilities

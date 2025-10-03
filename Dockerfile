@@ -21,8 +21,6 @@ RUN set -x \
         "https://dl.k8s.io/v1.34.1/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl
 
-# Use the static busybox as /bin/sh and provide `which`
-# busybox-static usually installs /bin/busybox (static) on Alpine
 RUN set -eux \
   && cp /bin/busybox.static /bin/busybox \
   && chmod 0755 /bin/busybox

@@ -4,8 +4,6 @@ ENV HOME="/"
 
 RUN set -x \
     && apk add --update --no-cache \
-        curl \
-        jq \
         bash \
         busybox-static \
     && rm -rf /var/cache/apk/*

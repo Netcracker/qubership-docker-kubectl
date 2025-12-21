@@ -16,7 +16,7 @@ RUN set -x \
         --no-check-certificate \
         -nv \
         -O /usr/bin/kubectl \
-        "https://dl.k8s.io/v1.34.1/bin/linux/${TARGETARCH}/kubectl" \
+        "https://dl.k8s.io/v1.35.0/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl
 
 RUN set -eux \

@@ -26,8 +26,5 @@ RUN set -eux \
 # Upgrade all tools to avoid vulnerabilities
 RUN set -x && apk upgrade --no-cache --available
 
-RUN apk add --update --upgrade --no-cache \
-        curl libcurl jq libcrypto3 libssl3
-
 USER 1001
 ENTRYPOINT [ "kubectl" ]

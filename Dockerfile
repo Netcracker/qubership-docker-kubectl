@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.24
 
 ENV HOME="/"
 
@@ -16,7 +16,7 @@ RUN set -x \
         --no-check-certificate \
         -nv \
         -O /usr/bin/kubectl \
-        "https://dl.k8s.io/v1.35.3/bin/linux/${TARGETARCH}/kubectl" \
+        "https://dl.k8s.io/v1.36.1/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl
 
 RUN set -eux \
@@ -25,11 +25,6 @@ RUN set -eux \
 
 # Upgrade all tools to avoid vulnerabilities
 RUN set -x && apk upgrade --no-cache --available
-
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories  \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk add --update --upgrade --no-cache \
-        curl libcurl jq libcrypto3 libssl3
 
 USER 1001
 ENTRYPOINT [ "kubectl" ]

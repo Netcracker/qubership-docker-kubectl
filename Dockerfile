@@ -27,10 +27,7 @@ RUN set -eux \
 RUN set -x && apk upgrade --no-cache --available
 
 RUN apk add --update --upgrade --no-cache \
-        curl libcurl libcrypto3 libssl3 \
-    && apk add --no-cache \
-        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main \
-        jq=1.8.2-r0
+        curl libcurl jq libcrypto3 libssl3
 
 USER 1001
 ENTRYPOINT [ "kubectl" ]

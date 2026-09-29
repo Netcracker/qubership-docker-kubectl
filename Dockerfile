@@ -16,8 +16,9 @@ RUN set -x \
         --no-check-certificate \
         -nv \
         -O /usr/bin/kubectl \
-        "https://dl.k8s.io/v1.36.1/bin/linux/${TARGETARCH}/kubectl" \
-    && chmod +x /usr/bin/kubectl
+        "https://dl.k8s.io/release/v1.36.5/bin/linux/${TARGETARCH}/kubectl" \
+    && chmod +x /usr/bin/kubectl \
+    && kubectl version --client
 
 RUN set -eux \
   && cp /bin/busybox.static /bin/busybox \

@@ -16,7 +16,7 @@ RUN set -x \
         --no-check-certificate \
         -nv \
         -O /usr/bin/kubectl \
-        "https://dl.k8s.io/release/v1.36.5/bin/linux/${TARGETARCH}/kubectl" \
+        "https://dl.k8s.io/release/v1.36.7/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/bin/kubectl \
     && kubectl version --client
 
